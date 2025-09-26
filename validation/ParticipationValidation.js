@@ -46,11 +46,11 @@ const participantValidationSchema = z.object({
         .max(100, { message: "School/College name must not exceed 100 characters" })
         .regex(/^[a-zA-Z\s]+$/, { message: "School/College name can only contain letters and spaces" }),
 
-    categoryId: z.string()
-        .nonempty({ message: "Category is required" }),
+    // categoryId: z.string()
+    //     .nonempty({ message: "Category is required" }),
 
-    subcategoryId: z.string()
-        .nonempty({ message: "Subcategory is required" }),
+    // subcategoryId: z.string()
+    //     .nonempty({ message: "Subcategory is required" }),
 });
 
 module.exports = participantValidationSchema;
