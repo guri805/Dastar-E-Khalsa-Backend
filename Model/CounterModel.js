@@ -6,7 +6,7 @@ const CounterSchema = new mongoose.Schema({
     count: { type: Number, default: 0 }, // Default count is 0
 }, { timestamps: true });
 
-CounterSchema.index({ categoryId: 1, subcategoryId: 1 }, { unique: true }); // Prevent duplicate counters
+CounterSchema.index({ categoryId: 1, subcategoryId: 1 }, { unique: true }); 
 
 const CounterModel = mongoose.model("Counter", CounterSchema);
 module.exports = CounterModel;
