@@ -10,7 +10,7 @@ const ParticipantSchema = new mongoose.Schema(
         hometown: { type: String, required: true, trim: true },
         whatsappNumber: { type: String, required: true, trim: true },
         email: { type: String, required: true, trim: true, unique: true },
-        schoolOrCollege: { type: String, required: true, trim: true },
+        schoolOrCollege: { type: String, trim: true },
         competition: { type: String, enum: ["turban", "dumala"], required: true },
         group: { type: String, enum: ["junior", "senior", "expert"], required: true },
         categoryId: { type: mongoose.Schema.Types.ObjectId, ref: "categories", required: true },

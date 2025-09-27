@@ -42,9 +42,9 @@ const participantValidationSchema = z.object({
     group: z.enum(["junior", "senior", "expert"], { message: "Gender must be 'Male' or 'Female'" }),
 
     schoolOrCollege: z.string()
-        .nonempty({ message: "School/College is required" })
-        .max(100, { message: "School/College name must not exceed 100 characters" })
-        .regex(/^[a-zA-Z\s]+$/, { message: "School/College name can only contain letters and spaces" }),
+        // .max(100, { message: "School/College name must not exceed 100 characters" })
+        // .regex(/^[a-zA-Z\s]+$/, { message: "School/College name can only contain letters and spaces" })
+        .optional(),
 
     // categoryId: z.string()
     //     .nonempty({ message: "Category is required" }),

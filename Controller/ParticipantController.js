@@ -5,7 +5,7 @@ const Category = require("../Model/CategoryModel");
 
 const participantData = async (req, res) => {
   try {
-    console.log("Received Data:", req.body);
+    // console.log("Received Data:", req.body);
 
     const {
       fullName,
@@ -30,20 +30,24 @@ const participantData = async (req, res) => {
       });
     }
 
-    const category = await Category.findOne({
+    // ✅ Ensure Category exists (create if not found)
+    let category = await Category.findOne({
       name: competition.toLowerCase(),
     });
+    if (!category) {
+      category = new Category({ name: competition.toLowerCase() });
+      await category.save();
+    }
 
-    const subcategory = await Subcategory.findOne({ group });
+    // ✅ Ensure Subcategory exists (create if not found)
+    let subcategory = await Subcategory.findOne({ group });
+    if (!subcategory) {
+      subcategory = new Subcategory({ group });
+      await subcategory.save();
+    }
+
     console.log("category data", category._id);
     console.log("subcategory data", subcategory._id);
-
-    if (!category || !subcategory) {
-      return res.status(400).json({
-        success: false,
-        message: "Category and subcategory are required",
-      });
-    }
 
     // **Check Gender Restriction for Turban**
     if (gender === "Female" && category.name.toLowerCase() === "turban") {
@@ -101,7 +105,6 @@ const participantData = async (req, res) => {
 
     // Create participant entry
     const newParticipant = new Participant({
-      // _id: participantId,
       tokenNumber: participantId,
       fullName,
       age,
@@ -131,6 +134,7 @@ const participantData = async (req, res) => {
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
+
 
 // Get All Participants
 const allParticipantDetails = async (req, res) => {
